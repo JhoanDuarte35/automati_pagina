@@ -1,0 +1,170 @@
+import time
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+from openpyxl import load_workbook
+
+archivo_excel = load_workbook('Libro8.xlsx')
+hoja = archivo_excel.active
+datos = []
+
+for fila in hoja.iter_rows(values_only=True):
+    datos.append(fila)
+
+for x in datos:
+    print (x)
+
+# Inicializa el navegador
+driver = webdriver.Chrome()
+
+# Abre la página web
+driver.get("https://adminnew.dinercol.co/")
+
+# Encuentra el campo de entrada del formulario y lo llena con un valor
+input_field = driver.find_element(By.NAME, "username")
+input_field.send_keys("Dinercol")
+
+input_field = driver.find_element(By.NAME, "password")
+input_field.send_keys("Colombia1234*")
+
+driver.find_element(By.TAG_NAME,"body").send_keys(Keys.TAB)
+
+time.sleep(2)
+
+
+
+current_url = driver.current_url
+print("La URL actual es:", current_url)
+
+time.sleep(20)
+current_url = driver.current_url
+
+
+if current_url == "https://adminnew.dinercol.co/#/layout/dashboard":
+    driver.get("https://adminnew.dinercol.co/#/layout/overdue/overdueTicket")
+
+    for w in datos:
+        
+        print("Bot en ejecucion Itenacion id_producto.", w)
+
+        time.sleep(1)
+
+        for i in range(11):
+            driver.find_element(By.TAG_NAME,"body").send_keys(Keys.TAB)
+
+        active_element = driver.switch_to.active_element
+        active_element.send_keys(w)
+
+        active_element.send_keys(Keys.ENTER)
+
+        for z in range(15):
+                
+            driver.find_element(By.TAG_NAME,"body").send_keys(Keys.TAB)
+            time.sleep(1)
+            active_ele = driver.switch_to.active_element
+            active_ele.send_keys(Keys.ESCAPE)
+
+
+        active_element2 = driver.switch_to.active_element
+        active_element2.send_keys(Keys.ENTER)
+
+        time.sleep(3)
+
+
+        #Persona de contacto
+
+        for i in range(37):
+            driver.find_element(By.TAG_NAME,"body").send_keys(Keys.TAB)
+
+        active_element3 = driver.switch_to.active_element
+        active_element3.send_keys(Keys.SPACE)
+
+        time.sleep(1)
+
+        #Contactos
+
+        for i in range(1):
+            driver.find_element(By.TAG_NAME,"body").send_keys(Keys.TAB)
+            time.sleep(1)
+
+
+        active_element4 = driver.switch_to.active_element
+        active_element4.send_keys(Keys.SPACE)
+
+        time.sleep(1)
+
+        #tiempo de contacto
+
+        for i in range(1):
+            driver.find_element(By.TAG_NAME,"body").send_keys(Keys.TAB)
+            active_ele2 = driver.switch_to.active_element
+            active_ele2.send_keys(Keys.ESCAPE)
+            time.sleep(1)
+
+
+        active_element5 = driver.switch_to.active_element
+        active_element5.send_keys(Keys.SPACE)
+
+        time.sleep(1)
+
+        #si estar en contacto
+
+        for i in range(1):
+            driver.find_element(By.TAG_NAME,"body").send_keys(Keys.TAB)
+            time.sleep(1)
+
+
+
+        active_element6 = driver.switch_to.active_element
+        active_element6.send_keys(Keys.ARROW_RIGHT)
+
+        time.sleep(1)
+
+        active_element7 = driver.switch_to.active_element
+        active_element7.send_keys(Keys.SPACE)
+
+        #Causas sin contestar
+
+        for i in range(1):
+            driver.find_element(By.TAG_NAME,"body").send_keys(Keys.TAB)
+            time.sleep(1)
+
+
+        active_element8 = driver.switch_to.active_element
+        active_element8.send_keys(Keys.SPACE)
+
+        #Nota
+
+
+        for i in range(1):
+            driver.find_element(By.TAG_NAME,"body").send_keys(Keys.TAB)
+            time.sleep(1)
+
+
+        active_element9 = driver.switch_to.active_element
+        active_element9.send_keys("Gestion predictivo")
+
+        #Enviar
+
+        for i in range(1):
+            driver.find_element(By.TAG_NAME,"body").send_keys(Keys.TAB)
+            time.sleep(1)
+
+
+        active_element10 = driver.switch_to.active_element
+        active_element10.send_keys(Keys.ENTER)
+        
+        time.sleep(1)
+
+        driver.get("https://adminnew.dinercol.co/#/layout/overdue/overdueTicket")
+
+        time.sleep(1)
+
+
+
+elif current_url == "https://adminnew.dinercol.co/#/login?redirect=%23%2F":
+    print("La URL actual es:", current_url)
+
+    # Pausa el script durante 1000 segundos para que el navegador permanezca abierto
+
+    # Cierra el navegador
