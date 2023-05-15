@@ -30,8 +30,10 @@ input_field.send_keys("Colombia1234*")
 driver.find_element(By.TAG_NAME,"body").send_keys(Keys.TAB)
 
 time.sleep(2)
+
 error = 0
 cargado = 0
+contador = 0
 
 
 current_url = driver.current_url
@@ -45,8 +47,9 @@ if current_url == "https://adminnew.dinercol.co/#/layout/dashboard":
     driver.get("https://adminnew.dinercol.co/#/layout/overdue/overdueTicket")
 
     for w in datos:
-        
-        print("*** Bot en ejecucion Itenacion id_producto.", w , " ***")
+
+        contador=contador+1
+        print("*** ", contador , " Bot en ejecucion Itenacion id_producto.", w , " ***")
 
         time.sleep(1)
 
