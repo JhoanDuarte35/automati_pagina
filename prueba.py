@@ -30,7 +30,8 @@ input_field.send_keys("Colombia1234*")
 driver.find_element(By.TAG_NAME,"body").send_keys(Keys.TAB)
 
 time.sleep(2)
-
+error = 0
+cargado = 0
 
 
 current_url = driver.current_url
@@ -45,7 +46,7 @@ if current_url == "https://adminnew.dinercol.co/#/layout/dashboard":
 
     for w in datos:
         
-        print("Bot en ejecucion Itenacion id_producto.", w)
+        print("*** Bot en ejecucion Itenacion id_producto.", w , " ***")
 
         time.sleep(1)
 
@@ -64,12 +65,18 @@ if current_url == "https://adminnew.dinercol.co/#/layout/dashboard":
             active_ele = driver.switch_to.active_element
             active_ele.send_keys(Keys.ESCAPE)
 
-
         active_element2 = driver.switch_to.active_element
         active_element2.send_keys(Keys.ENTER)
 
         time.sleep(3)
 
+        current_url_act = driver.current_url
+
+        if current_url_act == 'https://adminnew.dinercol.co/#/layout/overdue/overdueTicket' :
+            error = error + 1
+            print('Id_producto no encontrado', w)
+            driver.get("https://adminnew.dinercol.co/#/layout/overdue/overdueTicket")
+            continue
 
         #Persona de contacto
 
@@ -93,7 +100,7 @@ if current_url == "https://adminnew.dinercol.co/#/layout/dashboard":
 
         time.sleep(1)
 
-        #tiempo de contacto
+        #Tiempo de contacto
 
         for i in range(1):
             driver.find_element(By.TAG_NAME,"body").send_keys(Keys.TAB)
@@ -107,7 +114,7 @@ if current_url == "https://adminnew.dinercol.co/#/layout/dashboard":
 
         time.sleep(1)
 
-        #si estar en contacto
+        #Si estar en contacto
 
         for i in range(1):
             driver.find_element(By.TAG_NAME,"body").send_keys(Keys.TAB)
@@ -156,15 +163,20 @@ if current_url == "https://adminnew.dinercol.co/#/layout/dashboard":
         
         time.sleep(1)
 
+        current_url_act = driver.current_url
+
+        if current_url_act == 'https://adminnew.dinercol.co/#/layout/overdue/overdueTicket' :
+            cargado = cargado + 1
+            print('Id_producto cargado con exito', w)
+
         driver.get("https://adminnew.dinercol.co/#/layout/overdue/overdueTicket")
 
         time.sleep(1)
 
-
+    print('*** Ejecución Finalizada Con Exito *** ')
+    print('✅ Correcto: ', cargado)
+    print('❌ Errores: ', error)
 
 elif current_url == "https://adminnew.dinercol.co/#/login?redirect=%23%2F":
     print("La URL actual es:", current_url)
 
-    # Pausa el script durante 1000 segundos para que el navegador permanezca abierto
-
-    # Cierra el navegador
