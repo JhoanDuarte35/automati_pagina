@@ -158,7 +158,7 @@ if current_url == "https://adminnew.dinercol.co/#/layout/dashboard":
 
 
         active_element9 = driver.switch_to.active_element
-        active_element9.send_keys("Gestion predictivo ")
+        active_element9.send_keys("Gestión predictivo no contesta")
 
         #Enviar
 
