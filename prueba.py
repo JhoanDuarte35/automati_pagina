@@ -3,8 +3,10 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from openpyxl import load_workbook
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
-archivo_excel = load_workbook('Libro8.xlsx')
+archivo_excel = load_workbook('Datos.xlsx')
 hoja = archivo_excel.active
 datos = []
 
@@ -44,7 +46,11 @@ current_url = driver.current_url
 
 
 if current_url == "https://adminnew.dinercol.co/#/layout/dashboard":
+
     driver.get("https://adminnew.dinercol.co/#/layout/overdue/overdueTicket")
+
+    wait = WebDriverWait(driver, 10)  
+    wait.until(EC.presence_of_element_located((By.TAG_NAME, 'body')))
 
     for w in datos:
 
@@ -152,7 +158,7 @@ if current_url == "https://adminnew.dinercol.co/#/layout/dashboard":
 
 
         active_element9 = driver.switch_to.active_element
-        active_element9.send_keys("Gestion predictivo")
+        active_element9.send_keys("Gestion predictivo ")
 
         #Enviar
 
@@ -165,6 +171,9 @@ if current_url == "https://adminnew.dinercol.co/#/layout/dashboard":
         active_element10.send_keys(Keys.ENTER)
         
         time.sleep(1)
+
+        wait = WebDriverWait(driver, 10)  # Configura un tiempo de espera máximo de 10 segundos
+        wait.until(EC.presence_of_element_located((By.TAG_NAME, 'body')))
 
         current_url_act = driver.current_url
 
